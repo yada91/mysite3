@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.http.HTTPException;
 
-import com.mysite.user.DAO.UsersDAO;
-import com.mysite.user.VO.Users;
+import com.mysite.DAO.UsersDAO;
+import com.mysite.VO.Users;
 import com.mysite.web.Action;
 import com.mysite.web.util.WebUtil;
 

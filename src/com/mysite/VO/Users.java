@@ -1,4 +1,4 @@
-package com.mysite.user.VO;
+package com.mysite.VO;
 
 public class Users {
 

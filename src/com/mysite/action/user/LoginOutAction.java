@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import javax.xml.ws.http.HTTPException;
 
-import com.mysite.user.VO.Users;
+import com.mysite.VO.Users;
 import com.mysite.web.Action;
 import com.mysite.web.util.WebUtil;
 

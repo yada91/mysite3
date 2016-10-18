@@ -1,8 +1,8 @@
 package com.mysite.action.user;
 
 import com.mysite.action.main.MainAction;
-import com.mysites3.web.Action;
-import com.mysites3.web.ActionFactory;
+import com.mysite.web.Action;
+import com.mysite.web.ActionFactory;
 
 public class UserActionFactory extends ActionFactory {
 

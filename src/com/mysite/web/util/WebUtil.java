@@ -1,4 +1,4 @@
-package com.mysites3.web.util;
+package com.mysite.web.util;
 
 import java.io.IOException;
 
@@ -18,6 +18,6 @@ public class WebUtil {
 
 	public static void redirect(HttpServletRequest request, HttpServletResponse response, String url)
 			throws IOException {
-		response.sendRedirect(url);
+		response.sendRedirect(request.getContextPath() + url);
 	}
 }

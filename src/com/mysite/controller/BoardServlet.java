@@ -1,4 +1,4 @@
-package com.mysite3.controller;
+package com.mysite.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,22 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysite.action.main.MainActionFactory;
-import com.mysite.action.user.UserActionFactory;
-import com.mysites3.web.Action;
-import com.mysites3.web.ActionFactory;
-
-@WebServlet("/user")
-public class UserServlet extends HttpServlet {
+@WebServlet("/board")
+public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String actionName = request.getParameter("a");
-		ActionFactory af = new UserActionFactory();
-		Action action = af.getAction(actionName);
-		action.execute(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

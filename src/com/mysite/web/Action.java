@@ -1,4 +1,4 @@
-package com.mysites3.web;
+package com.mysite.web;
 
 import java.io.IOException;
 

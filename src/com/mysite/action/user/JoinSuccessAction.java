@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.http.HTTPException;
 
-import com.mysites3.web.Action;
-import com.mysites3.web.util.WebUtil;
+import com.mysite.web.Action;
+import com.mysite.web.util.WebUtil;
 
 public class JoinSuccessAction implements Action {
 

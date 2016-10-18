@@ -10,8 +10,8 @@ import javax.xml.ws.http.HTTPException;
 
 import com.mysite.user.DAO.UsersDAO;
 import com.mysite.user.VO.Users;
-import com.mysites3.web.Action;
-import com.mysites3.web.util.WebUtil;
+import com.mysite.web.Action;
+import com.mysite.web.util.WebUtil;
 
 public class LoginAction implements Action {
 
@@ -23,7 +23,7 @@ public class LoginAction implements Action {
 
 		Users users = UsersDAO.selectNo(email, password);
 		if (users == null) {
-			WebUtil.redirect(request, response, "/mysite3/user?a=loginform&result=fail");
+			WebUtil.redirect(request, response, "/user?a=loginform&result=fail");
 			return; // 주의: redirect를 한 후 다음 코드가 실행 되지 않도록 함수 종료
 		}
 
@@ -32,7 +32,7 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", users);
 
-		WebUtil.redirect(request, response, "/mysite3/main");
+		WebUtil.redirect(request, response, "/main");
 	}
 
 }

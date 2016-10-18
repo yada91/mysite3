@@ -8,8 +8,8 @@ import javax.xml.ws.http.HTTPException;
 
 import com.mysite.user.DAO.UsersDAO;
 import com.mysite.user.VO.Users;
-import com.mysites3.web.Action;
-import com.mysites3.web.util.WebUtil;
+import com.mysite.web.Action;
+import com.mysite.web.util.WebUtil;
 
 public class JoinAction implements Action {
 
@@ -29,8 +29,8 @@ public class JoinAction implements Action {
 		users.setPassword(password);
 
 		UsersDAO.insert(users);
-		
-		WebUtil.redirect(request, response, "/mysite3/user?a=joinsuccess");
+
+		WebUtil.redirect(request, response, "/user?a=joinsuccess");
 	}
 
 }

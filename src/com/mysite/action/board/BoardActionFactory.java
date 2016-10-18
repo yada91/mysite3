@@ -9,8 +9,8 @@ import com.mysite.action.user.LoginFormAction;
 import com.mysite.action.user.LoginOutAction;
 import com.mysite.action.user.ModifyAction;
 import com.mysite.action.user.ModifyFormAction;
-import com.mysites3.web.Action;
-import com.mysites3.web.ActionFactory;
+import com.mysite.web.Action;
+import com.mysite.web.ActionFactory;
 
 public class BoardActionFactory extends ActionFactory {
 

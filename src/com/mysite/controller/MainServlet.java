@@ -1,4 +1,4 @@
-package com.mysite3.controller;
+package com.mysite.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mysite.action.main.MainActionFactory;
-import com.mysites3.web.Action;
-import com.mysites3.web.ActionFactory;
+import com.mysite.web.Action;
+import com.mysite.web.ActionFactory;
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {

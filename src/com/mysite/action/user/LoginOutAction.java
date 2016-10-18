@@ -9,8 +9,8 @@ import javax.websocket.Session;
 import javax.xml.ws.http.HTTPException;
 
 import com.mysite.user.VO.Users;
-import com.mysites3.web.Action;
-import com.mysites3.web.util.WebUtil;
+import com.mysite.web.Action;
+import com.mysite.web.util.WebUtil;
 
 public class LoginOutAction implements Action {
 
@@ -19,7 +19,7 @@ public class LoginOutAction implements Action {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		if (session == null) {
-			WebUtil.redirect(request, response, "/mysite3/main");
+			WebUtil.redirect(request, response, "/main");
 			return;
 		}
 
@@ -29,7 +29,7 @@ public class LoginOutAction implements Action {
 			session.invalidate();
 
 		}
-		WebUtil.redirect(request, response, "/mysite3/main");
+		WebUtil.redirect(request, response, "/main");
 	}
 
 }

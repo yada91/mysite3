@@ -41,7 +41,7 @@ public class UsersDAO {
 			}
 		}
 	}
-
+	//로그인시
 	public static Users selectNo(String email, String password) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -85,6 +85,7 @@ public class UsersDAO {
 		return users;
 	}
 
+	//업데이트시
 	public static Users selectNo(Long no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -141,11 +142,42 @@ public class UsersDAO {
 		try {
 			conn = DAOConnection.connection();
 
+			String sql = "update users set name =?, gender = ? where no =?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, users.getName());
+			stmt.setString(2, users.getGender());
+			stmt.setLong(3, users.getNo());
+
+			stmt.executeUpdate();//
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void update(Users users, String password) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			conn = DAOConnection.connection();
+
 			String sql = "update users set name =?, password = ? , gender = ? where no =?";
 
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, users.getName());
-			stmt.setString(2, users.getPassword());
+			stmt.setString(2, password);
 			stmt.setString(3, users.getGender());
 			stmt.setLong(4, users.getNo());
 

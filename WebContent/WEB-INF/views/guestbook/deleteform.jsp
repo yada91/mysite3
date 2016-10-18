@@ -18,11 +18,11 @@
 			<div id="guestbook" class="delete-form">
 				<form method="post" action="${pageContext.request.contextPath }/gb">
 					<input type="hidden" name="a" value="delete"> <input
-						type='hidden' name="no" value=""> <label>비밀번호</label> <input
-						type="password" name="password"> <input type="submit"
-						value="확인">
+						type='hidden' name="id" value="${param.id }"> <label>비밀번호</label>
+					<input type="password" name="password"> <input
+						type="submit" value="확인">
 				</form>
-				<a href="">방명록 리스트</a>
+				<a href="${pageContext.request.contextPath }/gb">방명록 리스트</a>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">

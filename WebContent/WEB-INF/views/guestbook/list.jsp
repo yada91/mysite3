@@ -10,6 +10,7 @@
 <link
 	href="${pageContext.request.contextPath }/assets/css/guestbook.css"
 	rel="stylesheet" type="text/css">
+<jsp:scriptlet>pageContext.setAttribute("newline", "\n");</jsp:scriptlet>
 </head>
 <body>
 	<div id="container">
@@ -46,7 +47,7 @@
 									href="${pageContext.request.contextPath }/gb?a=deleteform&id=${vo.id}">삭제</a></td>
 							</tr>
 							<tr>
-								<td colspan=4>${vo.content}</td>
+								<td colspan=4>${fn:replace(vo.content,newline, "<br/>")}</td>
 							</tr>
 						</table>
 					</c:forEach>

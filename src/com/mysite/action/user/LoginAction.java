@@ -29,7 +29,7 @@ public class LoginAction implements Action {
 
 		// false or 빈 파라미터 - jsessionid 와 연결된 sseion 객체가 없으면 null
 		// true- jsessionid 와 연결된 session 객체가 없으면 만들어서 리턴
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(true); 
 		session.setAttribute("authUser", users);
 
 		WebUtil.redirect(request, response, "/main");

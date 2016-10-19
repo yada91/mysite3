@@ -18,11 +18,21 @@ public class BoardActionFactory extends ActionFactory {
 	public Action getAction(String actionName) {
 		// TODO Auto-generated method stub
 		Action action = null;
-		if ("write".equals(actionName)) {
-			action = new ListAction();
-		} else if ("".equals(actionName)) {
-			
-		}else{
+		if ("writeform".equals(actionName)) {
+			action = new WriteFormAction();
+		} else if ("write".equals(actionName)) {
+			action = new WriteAction();
+		} else if ("view".equals(actionName)) {
+			action = new ViewAction();
+		} else if ("modifyform".equals(actionName)) {
+			action = new BoardModifyFormAction();
+		} else if ("modify".equals(actionName)) {
+			action = new BoardModifyAction();
+		} else if ("replyform".equals(actionName)) {
+			action = new ReplyFormAction();
+		} else if ("reply".equals(actionName)) {
+			action = new ReplyAction();
+		} else {
 			action = new ListAction();
 		}
 		return action;

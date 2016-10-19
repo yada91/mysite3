@@ -18,7 +18,7 @@ public class ModifyFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, HTTPException {
 		HttpSession session = request.getSession();
-		Users authUser = (Users) session.getAttribute("authUser");
+		Users authUser =  (Users) session.getAttribute("authUser");
 
 		Users users = UsersDAO.selectNo(authUser.getNo());
 

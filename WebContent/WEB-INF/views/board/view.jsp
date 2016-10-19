@@ -10,6 +10,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.request.contextPath }/assets/css/board.css"
 	rel="stylesheet" type="text/css">
+<jsp:scriptlet>pageContext.setAttribute("newline", "\n");</jsp:scriptlet>
 </head>
 <body>
 	<div id="container">
@@ -22,19 +23,33 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>제목입니다.</td>
+						<td>${view.title }</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
-							<div class="view-content">
-								내용 1입니다.<br> 내용 2입니다.<br> 내용 3입니다.
+							<div class="view-content">${fn:replace(view.content,newline, "<br/>")}
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="">글목록</a> <a href="">글수정</a>
+					<c:if test="${authUser.no == view.user_no}">
+						<a
+							href="${pageContext.request.contextPath }/board?a=modifyform&no=${view.no}&">글수정</a>
+					</c:if>
+					<c:choose>
+						<c:when test="${empty authUser }">
+						</c:when>
+						<c:otherwise>
+							<a
+								href="${pageContext.request.contextPath }/board?a=replyform&no=${view.no}">답글
+								달기</a>
+						</c:otherwise>
+					</c:choose>
+
+					<a href="${pageContext.request.contextPath }/board?p=${p}">글목록</a>
+
 				</div>
 			</div>
 		</div>

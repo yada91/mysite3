@@ -54,8 +54,20 @@
 							<td>${list.user_name}</td>
 							<td>${list.hits }</td>
 							<td>[${list.reg_date }]</td>
-							<td><a href="" class="del">삭제</a></td>
+							<c:choose>
+								<c:when test="${empty authUser }">
+								</c:when>
+								<c:otherwise>
+									<c:if test="${authUser.no == list.user_no}">
+										<td><a
+											href="${pageContext.request.contextPath }/board?a=delete&no=${list.no}&p=${current}"
+											class="del"><img
+												src="${pageContext.request.contextPath }/assets/images/recycle.png"></a></td>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
 						</tr>
+
 					</c:forEach>
 				</table>
 				<div class="pager">

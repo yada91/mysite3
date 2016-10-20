@@ -21,7 +21,6 @@ public class ListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, HTTPException {
 		// TODO Auto-generated method stub
 		String p = request.getParameter("p");
-		String l = request.getParameter("l");
 
 		double total = BoardDAO.count();
 		int lastPage = (int) Math.ceil(total / (double) PAGESIZE);
@@ -34,19 +33,21 @@ public class ListAction implements Action {
 		if (p == null || "".equals(p)) {
 			int currentPage = 1;
 			page.setCurrentPage(currentPage);
+			page.setStartPage(1);
 		} else {
 			int currentPage = Integer.parseInt(p);
 			page.setCurrentPage(currentPage);
-		}
 
-		if (l == null || "".equals(l)) {
-			int startPage = 1;
-			page.setStartPage(startPage);
-		} else {
-			int startPage = Integer.parseInt(p);
-			page.setStartPage(startPage);
+			if ((currentPage / PAGESIZE) != 0) {
+				if ((currentPage % PAGESIZE) != 0) {
+					page.setStartPage(((currentPage / PAGESIZE) * 5) + 1);
+				} else {
+					page.setStartPage(1);
+				}
+			} else {
+				page.setStartPage(1);
+			}
 		}
-
 		request.setAttribute("total", (int) total);
 		request.setAttribute("list", BoardDAO.select(page));
 		request.setAttribute("page", page);

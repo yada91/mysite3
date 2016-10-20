@@ -16,6 +16,7 @@
 	<c:set var="size" value="${page.listSize}" />
 	<c:set var="last" value="${page.lastPage}" />
 	<c:set var="current" value="${page.currentPage}" />
+	<c:set var="count" value="${total}" />
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
@@ -35,7 +36,7 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-					<c:set var="count" value="${total}" />
+
 					<c:forEach items="${list}" var="list" varStatus="status">
 						<tr>
 							<td>[${count - list.rn+1}]</td>
@@ -78,7 +79,7 @@
 						<c:choose>
 							<c:when test="${1 <= start-size+1 }">
 								<li><a
-									href="${pageContext.request.contextPath }/board?p=${start-size+1}&l=${start-size+1}">◀</a></li>
+									href="${pageContext.request.contextPath }/board?p=${start-size}">◀</a></li>
 							</c:when>
 							<c:otherwise>
 								<li>◀</li>
@@ -86,20 +87,19 @@
 						</c:choose>
 
 
-						<c:forEach var="i" begin="${ start }" end="${size}"
-							varStatus="status">
+						<c:forEach var="i" begin="${ start }" end="${start + size -1}">
 							<c:choose>
-								<c:when test="${page.currentPage == start+status.index-1 }">
-									<li class="selected">${start+status.index-1 }</li>
+								<c:when test="${page.currentPage == i }">
+									<li class="selected">${i}</li>
 								</c:when>
 								<c:otherwise>
 									<c:choose>
-										<c:when test="${last >= start+status.index-1 }">
+										<c:when test="${last >= i}">
 											<li><a
-												href="${pageContext.request.contextPath }/board?p=${start+status.index-1 }">${start+status.index-1 }</a></li>
+												href="${pageContext.request.contextPath }/board?p=${i}">${i}</a></li>
 										</c:when>
 										<c:otherwise>
-											<li>${start+status.index-1 }</li>
+											<li>${i}</li>
 										</c:otherwise>
 									</c:choose>
 								</c:otherwise>
@@ -109,7 +109,7 @@
 						<c:choose>
 							<c:when test="${last >= start+size }">
 								<li><a
-									href="${pageContext.request.contextPath }/board?p=${start+size}&l=${start+size}">▶</a></li>
+									href="${pageContext.request.contextPath }/board?p=${start+size}">▶</a></li>
 							</c:when>
 							<c:otherwise>
 								<li>▶</li>

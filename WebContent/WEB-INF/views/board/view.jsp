@@ -36,14 +36,14 @@
 				<div class="bottom">
 					<c:if test="${authUser.no == view.user_no}">
 						<a
-							href="${pageContext.request.contextPath }/board?a=modifyform&no=${view.no}&">글수정</a>
+							href="${pageContext.request.contextPath }/board?a=modifyform&no=${view.no}&p=${p}&">글수정</a>
 					</c:if>
 					<c:choose>
 						<c:when test="${empty authUser }">
 						</c:when>
 						<c:otherwise>
 							<a
-								href="${pageContext.request.contextPath }/board?a=replyform&no=${view.no}">답글
+								href="${pageContext.request.contextPath }/board?a=replyform&no=${view.no}&p=${p}">답글
 								달기</a>
 						</c:otherwise>
 					</c:choose>

@@ -20,7 +20,9 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="" method="post">
+				<form id="search_form"
+					action="${pageContext.request.contextPath }/board?a=search"
+					method="post">
 					<input type="text" id="kwd" name="kwd" value=""> <input
 						type="submit" value="찾기">
 				</form>
@@ -88,8 +90,7 @@
 							varStatus="status">
 							<c:choose>
 								<c:when test="${page.currentPage == start+status.index-1 }">
-									<li class="selected"><a
-										href="${pageContext.request.contextPath }/board?p=${start+status.index-1 }">${start+status.index-1 }</a></li>
+									<li class="selected">${start+status.index-1 }</li>
 								</c:when>
 								<c:otherwise>
 									<c:choose>

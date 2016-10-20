@@ -108,6 +108,69 @@ public class BoardDAO {
 		return list;
 	}
 
+	public static ArrayList<Board> search(Page page, String kwd) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Board> list = null;
+
+		try {
+			conn = DAOConnection.connection();
+			String sql = "SELECT * FROM (SELECT ROWNUM AS rn, a1.* FROM (  SELECT b.no, b.title, b.hits, TO_CHAR (b.reg_date, 'yyyy-mm-dd hh:mi:ss') AS reg_date, b.DEPTH, u.NAME, b.USER_NO FROM board b, users u WHERE b.USER_NO = u.NO AND (b.TITLE like ? OR b.CONTENT LIKE ?) ORDER BY group_no DESC, order_no ASC) a1) a2 WHERE (? - 1) * ? + 1 <= a2.rn AND a2.rn <= ? * ?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, kwd);
+			pstmt.setString(2, kwd);
+			pstmt.setInt(3, page.getCurrentPage());
+			pstmt.setInt(4, page.getPageSize());
+			pstmt.setInt(5, page.getCurrentPage());
+			pstmt.setInt(6, page.getPageSize());
+
+			rs = pstmt.executeQuery();
+			list = new ArrayList<Board>();
+			while (rs.next()) {
+				Long rn = rs.getLong(1);
+				Long no = rs.getLong(2);
+				String title = rs.getString(3);
+				Long hits = rs.getLong(4);
+				String reg_date = rs.getString(5);
+				Long depth = rs.getLong(6);
+				String user_name = rs.getString(7);
+				Long user_no = rs.getLong(8);
+
+				Board board = new Board();
+				board.setRn(rn);
+				board.setNo(no);
+				board.setTitle(title);
+				board.setHits(hits);
+				board.setReg_date(reg_date);
+				board.setDepth(depth);
+				board.setUser_name(user_name);
+				board.setUser_no(user_no);
+
+				list.add(board);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
 	public static int count() {
 		Connection conn = null;
 		Statement stmt = null;
@@ -118,6 +181,43 @@ public class BoardDAO {
 			String sql = "select count(*) from board";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				countNum = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return countNum;
+	}
+
+	public static int searchCount(String kwd) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int countNum = 0;
+		try {
+			conn = DAOConnection.connection();
+			String sql = "select count(*) from board where content like ? OR title like ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, kwd);
+			stmt.setString(2, kwd);
+			rs = stmt.executeQuery();
 			if (rs.next()) {
 				countNum = rs.getInt(1);
 			}

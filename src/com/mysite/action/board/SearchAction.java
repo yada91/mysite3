@@ -12,24 +12,21 @@ import com.mysite.VO.Page;
 import com.mysite.web.Action;
 import com.mysite.web.util.WebUtil;
 
-public class ListAction implements Action {
-
+public class SearchAction implements Action {
 	final int LISTSIZE = 5;
 	final int PAGESIZE = 5;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, HTTPException {
-		// TODO Auto-generated method stub
 		String p = request.getParameter("p");
 		String l = request.getParameter("l");
+		String kwd = request.getParameter("kwd");
 
-		double total = BoardDAO.count();
-		int lastPage = (int) Math.ceil(total / (double) PAGESIZE);
-
+		double total;
+		int lastPage;
 		Page page = new Page();
 		page.setListSize(LISTSIZE);
 		page.setPageSize(PAGESIZE);
-		page.setLastPage(lastPage);
 
 		if (p == null || "".equals(p)) {
 			int currentPage = 1;
@@ -47,16 +44,28 @@ public class ListAction implements Action {
 			page.setStartPage(startPage);
 		}
 
-		request.setAttribute("total", (int) total);
-		request.setAttribute("list", BoardDAO.select(page));
+		if (kwd == null || "".equals(kwd)) {
+			total = BoardDAO.count();
+			lastPage = (int) Math.ceil(total / (double) PAGESIZE);
+
+			page.setLastPage(lastPage);
+			request.setAttribute("list", BoardDAO.select(page));
+		} else {
+			kwd = "%" + kwd + "%";
+			total = BoardDAO.searchCount(kwd);
+			lastPage = (int) Math.ceil(total / (double) PAGESIZE);
+
+			page.setLastPage(lastPage);
+			request.setAttribute("list", BoardDAO.search(page, kwd));
+		}
 		request.setAttribute("page", page);
+		request.setAttribute("total", (int) total);
 		try {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 }

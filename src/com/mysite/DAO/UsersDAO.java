@@ -30,18 +30,20 @@ public class UsersDAO {
 			System.out.println("error:" + e);
 		} finally {
 			try {
-				if (conn != null) {
-					conn.close();
-				}
 				if (stmt != null) {
 					stmt.close();
 				}
+				if (conn != null) {
+					conn.close();
+				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	//로그인시
+
+	// 로그인시
 	public static Users selectNo(String email, String password) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -69,14 +71,14 @@ public class UsersDAO {
 			System.out.println("error:" + e);
 		} finally {
 			try {
-				if (conn != null) {
-					conn.close();
+				if (rs != null) {
+					rs.close();
 				}
 				if (pstmt != null) {
 					pstmt.close();
 				}
-				if (rs != null) {
-					rs.close();
+				if (conn != null) {
+					conn.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -85,7 +87,7 @@ public class UsersDAO {
 		return users;
 	}
 
-	//업데이트시
+	// 업데이트시
 	public static Users selectNo(Long no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -119,15 +121,54 @@ public class UsersDAO {
 			System.out.println("error:" + e);
 		} finally {
 			try {
-				if (conn != null) {
-					conn.close();
+				if (rs != null) {
+					rs.close();
 				}
 				if (pstmt != null) {
 					pstmt.close();
 				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return users;
+	} // 업데이트시
+
+	public static Users selectNo(String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Users users = null;
+		try {
+			conn = DAOConnection.connection();
+			String sql = "select no from users where email = ?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				users = new Users();
+				users.setNo(rs.getLong(1));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
 				if (rs != null) {
 					rs.close();
 				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -154,12 +195,13 @@ public class UsersDAO {
 			System.out.println("error:" + e);
 		} finally {
 			try {
-				if (conn != null) {
-					conn.close();
-				}
 				if (stmt != null) {
 					stmt.close();
 				}
+				if (conn != null) {
+					conn.close();
+				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -186,12 +228,13 @@ public class UsersDAO {
 			System.out.println("error:" + e);
 		} finally {
 			try {
-				if (conn != null) {
-					conn.close();
-				}
 				if (stmt != null) {
 					stmt.close();
 				}
+				if (conn != null) {
+					conn.close();
+				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

@@ -22,9 +22,9 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form"
-					action="${pageContext.request.contextPath }/board?a=search"
-					method="post">
-					<input type="text" id="kwd" name="kwd" value=""> <input
+					action="${pageContext.request.contextPath }/board" method="get">
+					<input type="hidden" name="a" value="search"><input
+						type="text" id="kwd" name="kwd" value=""> <input
 						type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
@@ -82,7 +82,7 @@
 									href="${pageContext.request.contextPath }/board?p=${start-size}">◀</a></li>
 							</c:when>
 							<c:otherwise>
-								<li>◀</li>
+								<li></li>
 							</c:otherwise>
 						</c:choose>
 
@@ -112,7 +112,7 @@
 									href="${pageContext.request.contextPath }/board?p=${start+size}">▶</a></li>
 							</c:when>
 							<c:otherwise>
-								<li>▶</li>
+								<li></li>
 							</c:otherwise>
 						</c:choose>
 

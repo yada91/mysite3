@@ -442,7 +442,7 @@ public class BoardDAO {
 		try {
 			conn = DAOConnection.connection();
 
-			String sql = "DELETE FROM BOARD WHERE NO = ?";
+			String sql = "DELETE FROM BOARD WHERE no = ?";
 
 			stmt = conn.prepareStatement(sql);
 			stmt.setLong(1, no);
@@ -462,4 +462,5 @@ public class BoardDAO {
 			}
 		}
 	}
+
 }
